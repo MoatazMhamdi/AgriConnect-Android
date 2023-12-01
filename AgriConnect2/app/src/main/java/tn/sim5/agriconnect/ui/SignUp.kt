@@ -1,5 +1,6 @@
 package tn.sim5.agriconnect.ui
 import FarmerSignUpViewModel
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ class SignUp : AppCompatActivity() {
 
         binding.btnSignUp.setOnClickListener {
             validateAndSignUp()
+
         }
     }
     private fun validateAndSignUp() {
@@ -36,8 +38,13 @@ class SignUp : AppCompatActivity() {
 
         // Validate input
         if (name.isNotEmpty() && email.isNotEmpty() && numTel.isNotEmpty() && password.isNotEmpty()) {
-            // Trigger API call
+            Toast.makeText(this, "Farmer Registred succesfully", Toast.LENGTH_SHORT).show()
+
             viewModel.signUpFarmer(name, email, password, numTel)
+            startActivity(Intent(this, login::class.java))
+
+
+
         } else {
             // Handle case where some input is empty
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()

@@ -5,20 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import tn.sim5.agriconnect.R
+import tn.sim5.agriconnect.databinding.ActivityFirstPageBinding
 import tn.sim5.agriconnect.databinding.ActivityLoginBinding
-import tn.sim5.agriconnect.databinding.ActivitySignUpBinding
 
-class login : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
+class FirstPage : AppCompatActivity() {
+    private lateinit var binding: ActivityFirstPageBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityFirstPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d("SignUpActivity", "Button Clicked")
-        binding.btnCreateAccount.setOnClickListener {
-            startActivity(Intent(this, SignUp::class.java))
+        binding.btnFarmer.setOnClickListener {
+            startActivity(Intent(this, login::class.java))
 
-        }
-    }
+        }    }
 }
