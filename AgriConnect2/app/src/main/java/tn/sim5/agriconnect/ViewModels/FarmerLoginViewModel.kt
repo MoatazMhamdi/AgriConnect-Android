@@ -1,7 +1,6 @@
 package tn.sim5.agriconnect.ViewModels
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,21 +8,27 @@ import androidx.lifecycle.ViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import tn.sim5.agriconnect.models.FarmerSignUpResponse
 import tn.sim5.agriconnect.models.LoginRequest
 import tn.sim5.agriconnect.models.LoginResponse
 import tn.sim5.agriconnect.utils.RetrofitImp
+import tn.sim5.agriconnect.utils.SessionManager
 
-class FarmerLoginViewModel : ViewModel() {
-
+class FarmerLoginViewModel: ViewModel() {
+    private lateinit var context: Context
+    private val sessionManager: SessionManager by lazy { SessionManager(context) }
     private val _loginResult = MutableLiveData<String>()
     val loginResult: LiveData<String> get() = _loginResult
-
     private val _jwtToken = MutableLiveData<String>()
     val jwtToken: LiveData<String> get() = _jwtToken
-
     private val apiService = RetrofitImp.apiService
 
-    fun loginFarmer(numTel: String, password: String, context: Context) {
+
+
+    fun init(context: Context) {
+        this.context = context
+    }
+    fun loginFarmer(numTel: String, password: String) {
         val request = LoginRequest(numTel, password)
         val call = apiService.loginUser(request)
 
@@ -38,9 +43,13 @@ class FarmerLoginViewModel : ViewModel() {
                         // Handle JWT token
                         val jwtToken = loginResponse.token
                         _jwtToken.value = jwtToken
-
+                        val userId = loginResponse.userId
+                        saveTokenAndUserIdToSharedPreferences(jwtToken, userId)
                         // Save JWT token to SharedPreferences
-                        saveTokenToSharedPreferences(jwtToken, context)
+                        saveTokenToSharedPreferences(jwtToken)
+                        sessionManager.setAuthenticationStatus(true)
+
+
                     } else {
                         _loginResult.value = "Login response is null"
                     }
@@ -54,24 +63,31 @@ class FarmerLoginViewModel : ViewModel() {
             }
         })
     }
-
+    private fun saveTokenAndUserIdToSharedPreferences(token: String, userId: String) {
+        val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("JWT", token)
+        editor.putString("USER_ID", userId)
+        editor.apply()
+    }
     // Save JWT token to SharedPreferences
-    private fun saveTokenToSharedPreferences(token: String, context: Context) {
+    private fun saveTokenToSharedPreferences(token: String) {
         val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putString("JWT", token)
         editor.apply()
     }
 
+
     // Check if the user is authenticated
-    fun isAuthenticated(context: Context): Boolean {
+    fun isAuthenticated(): Boolean {
         val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val storedToken = sharedPreferences.getString("JWT", null)
         return !storedToken.isNullOrEmpty()
     }
 
     // Clear session on logout
-    fun clearSession(context: Context) {
+    fun clearSession() {
         val sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.remove("JWT")

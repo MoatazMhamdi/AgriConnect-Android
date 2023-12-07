@@ -21,3 +21,21 @@ data class LoginResponse(
     val message: String,
     val token: String // Add this property for the JWT token
 )
+data class EditProfileRequest(
+    val userId: String,
+    val fieldsToUpdate: Map<String, String>
+)
+
+data class EditProfileResponse(
+    val message: String,
+    val updatedUser: UserResponse
+)
+
+data class UserResponse(
+    val userId: String,
+    val name: String,
+    val email: String,
+    val numTel: String,
+    val password: String
+    // Add other properties as needed
+)

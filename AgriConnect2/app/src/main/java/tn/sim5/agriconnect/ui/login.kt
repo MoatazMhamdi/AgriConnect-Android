@@ -3,13 +3,10 @@ package tn.sim5.agriconnect.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import tn.sim5.agriconnect.R
 import tn.sim5.agriconnect.ViewModels.FarmerLoginViewModel
 import tn.sim5.agriconnect.databinding.ActivityLoginBinding
-import tn.sim5.agriconnect.databinding.ActivitySignUpBinding
 
 class login : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -22,6 +19,7 @@ class login : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = ViewModelProvider(this).get(FarmerLoginViewModel::class.java)
+        viewModel.init(this)
 
 //        Log.d("SignUpActivity", "Button Clicked")
         binding.btnCreateAccount.setOnClickListener {
@@ -34,17 +32,22 @@ class login : AppCompatActivity() {
         }
         binding.btnLogin.setOnClickListener(){
             validateAndLogin()
+
         }
     }
-        private fun validateAndLogin() {
-            numTel = binding.tiPhone.text.toString()
-            password = binding.tiPassword.text.toString()
+    private fun validateAndLogin() {
+        numTel = binding.tiPhone.text.toString()
+        password = binding.tiPassword.text.toString()
 
-            if (numTel.isNotEmpty() && password.isNotEmpty()) {
-                viewModel.loginFarmer(numTel, password)
-            } else {
-                Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            }
+        if (numTel.isNotEmpty() && password.isNotEmpty()) {
+            viewModel.loginFarmer(numTel, password)
+
+            startActivity(Intent(this, Profile::class.java))
+
+
+        } else {
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
         }
+    }
 
 }
