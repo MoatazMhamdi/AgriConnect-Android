@@ -108,14 +108,14 @@ class MaintenanceActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         response.body()?.let { maintenanceList ->
                             if (maintenanceList.isNotEmpty()) {
-                                // Prenez la première maintenance de la liste
-                                val maintenance = maintenanceList[0]
+                                // Prenez la dernière maintenance de la liste
+                                val lastMaintenance = maintenanceList.last()
 
                                 // Mettez à jour les TextView avec les valeurs de la maintenance
-                                textViewDateMaintenance.text = "Date de maintenance : ${maintenance.Date_Maintenance}"
-                                textViewTypeMaintenance.text = "Type de maintenance : ${maintenance.Type_Maintenance}"
-                                textViewDescription.text = "Description : ${maintenance.Description}"
-                                textViewCoutMaintenance.text = "Coût de maintenance : ${maintenance.Coût_Maintenance}"
+                                textViewDateMaintenance.text = "Date de maintenance : ${lastMaintenance.Date_Maintenance}"
+                                textViewTypeMaintenance.text = "Type de maintenance : ${lastMaintenance.Type_Maintenance}"
+                                textViewDescription.text = "Description : ${lastMaintenance.Description}"
+                                textViewCoutMaintenance.text = "Coût de maintenance : ${lastMaintenance.Coût_Maintenance}"
                             } else {
                                 Log.d("MaintenanceActivity", "La liste de maintenance est vide.")
                             }
