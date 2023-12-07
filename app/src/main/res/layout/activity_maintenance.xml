@@ -10,46 +10,35 @@
         android:padding="16dp">
 
 
-        <EditText
-            android:id="@+id/editTextDateMaintenance"
+        <TextView
+            android:id="@+id/textViewDateMaintenance"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Date de maintenance"
-            android:inputType="date" />
+            android:layout_height="48dp"
+            android:text="Date de maintenance" />
 
-
-        <Spinner
-            android:id="@+id/spinnerTypeMaintenance"
+        <TextView
+            android:id="@+id/textViewTypeMaintenance"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="48dp"
+            android:text="Type de maintenance" />
 
-
-        <EditText
-            android:id="@+id/editTextDescription"
+        <TextView
+            android:id="@+id/textViewDescription"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description"
-            android:inputType="textMultiLine" />
+            android:layout_height="48dp"
+            android:text="Description" />
 
         <!-- Champ pour Coût_Maintenance -->
-        <EditText
-            android:id="@+id/editTextCoutMaintenance"
+        <TextView
+            android:id="@+id/textViewCoutMaintenance"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Coût de maintenance"
-            android:inputType="numberDecimal" />
+            android:layout_height="48dp"
+            android:text="Coût de maintenance" />
 
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"/>
 
-        <Button
-            android:id="@+id/buttonSaveMaintenance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enregistrer" />
-
-        <Button
-            android:id="@+id/buttonCancelMaintenance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Annuler" />
     </LinearLayout>
 </ScrollView>

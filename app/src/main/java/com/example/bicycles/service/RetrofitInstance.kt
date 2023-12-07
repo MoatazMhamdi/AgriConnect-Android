@@ -21,15 +21,8 @@ object RetrofitInstance {
     val api: EquipmentApiService by lazy {
         retrofit.create(EquipmentApiService::class.java)
     }
-
-    val uploadImage: EquipmentApiService by lazy {
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addConverterFactory(ScalarsConverterFactory.create())
-            .build()
-
-        retrofit.create(EquipmentApiService::class.java)
+    val apiM: MaintenanceApiService by lazy {
+        retrofit.create(MaintenanceApiService::class.java)
     }
+
 }
