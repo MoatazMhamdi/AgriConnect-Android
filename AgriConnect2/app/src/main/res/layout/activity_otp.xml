@@ -30,20 +30,6 @@
         app:srcCompat="@drawable/otfverif" />
 
     <TextView
-        android:id="@+id/text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enter the OTP you received!"
-        android:textColor="#6E6F70"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.543" />
-
-    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -53,105 +39,69 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintVertical_bias="0.069" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="4"
+        android:text="Enter the OTP you received!"
+        android:textColor="#6E6F70"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.539"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.709">
+        app:layout_constraintVertical_bias="0.124" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiCode1Layout"
-            style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiEmailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone Number"
+        android:layout_margin="20dp"
+        app:startIconDrawable="@drawable/phone"
+        app:errorEnabled="true"
+        app:suffixText="Email"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiPhone"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_weight="1">
+            android:inputType="textEmailAddress"/>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiCode1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tiPasswordLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="8dp"
+        android:hint="OTP code"
+        app:errorEnabled="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiEmailLayout"
+        app:startIconDrawable="@drawable/baseline_check_24">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiCode2Layout"
-            style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/tiCode"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_weight="1">
+            android:inputType="text"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="538dp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiCode2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="40sp"
-                android:textStyle="bold" />
+    </com.google.android.material.textfield.TextInputLayout>
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiCode3Layout"
-            style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_weight="1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiCode3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tiCode4Layout"
-            style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:layout_weight="1">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tiCode4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textSize="40sp"
-                android:textStyle="bold" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </LinearLayout>
     <Button
         android:id="@+id/btnClient"
         android:layout_width="200dp"
@@ -166,5 +116,5 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.864" />
+        app:layout_constraintVertical_bias="0.961" />
 </androidx.constraintlayout.widget.ConstraintLayout>

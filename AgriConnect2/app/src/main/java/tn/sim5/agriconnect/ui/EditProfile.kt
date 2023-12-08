@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import tn.sim5.agriconnect.Repository.UserRepository
 import tn.sim5.agriconnect.ViewModels.ProfileViewModel
 import tn.sim5.agriconnect.databinding.ActivityEditProfileBinding
-import tn.sim5.agriconnect.utils.RetrofitImp
+import tn.sim5.agriconnect.models.EditProfileResponse
 import tn.sim5.agriconnect.utils.SessionManager
 
 class EditProfile : AppCompatActivity() {
@@ -24,8 +23,6 @@ class EditProfile : AppCompatActivity() {
         // Initialize ViewModel
         viewModel = ViewModelProvider(this).get(ProfileViewModel::class.java)
 
-
-
         // Initialize SessionManager
         sessionManager = SessionManager(this)
 
@@ -34,12 +31,12 @@ class EditProfile : AppCompatActivity() {
         val userId = sessionManager.fetchUserId()
 
         // Check if token and userId are available
-        if (token != null && userId != null) {
+
             // Handle button click to return to Profile activity
             binding.btnReturn.setOnClickListener {
                 startActivity(Intent(this, Profile::class.java))
             }
-
+        if (token != null && userId != null) {
             // Handle button click to edit profile
             binding.btnEdit.setOnClickListener {
                 // Assuming you have fieldsToUpdate as a map of fields to update
@@ -54,12 +51,9 @@ class EditProfile : AppCompatActivity() {
 
                 // Call editProfile function with the retrieved token, userId, and fieldsToUpdate
                 viewModel.editProfile(token, userId, fieldsToUpdate)
-              //  startActivity(Intent(this, Profile::class.java))
-
             }
         } else {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
-
         }
     }
 }

@@ -39,3 +39,18 @@ data class UserResponse(
     val password: String
     // Add other properties as needed
 )
+data class ForgetPasswordRequest(val numTel: String)
+data class VerifyOtpRequest(
+    val numTel: String,
+    val otp: String
+)
+data class OtpResponsee(val message: String)
+
+data class OtpResponse(val otp: String)
+
+data class ResetPasswordRequest(val numTel: String, val newPassword: String)
+// ResetPasswordResponse.kt
+data class ResetPasswordResponse(
+    val message: String
+)
+

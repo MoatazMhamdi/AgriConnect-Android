@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
-    tools:context=".ui.EditProfile">
+    tools:context=".ui.OTP">
     <Button
         android:id="@+id/btnReturn"
         style="@style/Widget.Material3.Button.IconButton"
@@ -16,56 +15,64 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
+        android:layout_width="wrap_content"
+        android:layout_height="400dp"
         android:layout_margin="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="Content_description_facebook_button"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
+        app:srcCompat="@drawable/otfverif" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tiFullNameLayout"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Name"
-        android:layout_margin="20dp"
-        app:startIconDrawable="@drawable/person"
-        app:errorEnabled="true"
+        android:text="Reset Password"
+        android:textColor="#131313"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.069" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiFullName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter your new password!"
+        android:textColor="#6E6F70"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.539"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.124" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tiEmailLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="Phone Number"
         android:layout_margin="20dp"
-        app:startIconDrawable="@drawable/mail"
+        app:startIconDrawable="@drawable/phone"
         app:errorEnabled="true"
         app:suffixText="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tiFullNameLayout">
+        app:layout_constraintTop_toBottomOf="@+id/ivLogo">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiEmail"
+            android:id="@+id/tiPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"/>
@@ -73,50 +80,32 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/PhoneLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone Number"
-        android:layout_margin="20dp"
-        app:startIconDrawable="@drawable/phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tiEmailLayout">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiPhone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPhonetic"/>
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/PasswordLayout"
+        android:id="@+id/tiPasswordLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
-        android:hint="Password"
+        android:layout_marginTop="8dp"
+        android:hint="New Password"
         app:errorEnabled="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.76"
         app:passwordToggleEnabled="true"
+
+        app:layout_constraintTop_toBottomOf="@+id/tiEmailLayout"
         app:startIconDrawable="@drawable/lock">
 
-
-
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/tiPassword"
+            android:id="@+id/tiNewPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            tools:layout_editor_absoluteX="20dp"
+            tools:layout_editor_absoluteY="538dp" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnReset"
         android:layout_width="200dp"
         android:layout_height="60dp"
         android:layout_margin="20dp"
@@ -130,5 +119,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.961" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
