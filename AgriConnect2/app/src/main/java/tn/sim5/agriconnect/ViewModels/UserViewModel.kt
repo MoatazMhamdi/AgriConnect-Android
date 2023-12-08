@@ -21,12 +21,19 @@ class FarmerSignUpViewModel : ViewModel() {
 
         call.enqueue(object : Callback<FarmerSignUpResponse> {
             override fun onResponse(call: Call<FarmerSignUpResponse>, response: Response<FarmerSignUpResponse>) {
-                if (response.isSuccessful) {
-                    val message = response.body()?.message ?: "Unknown message"
-                    _signUpResult.value = message
-                } else {
-                    // Handle unsuccessful response
-                    _signUpResult.value = "Sign up failed"
+                when {
+                    response.isSuccessful -> {
+                        val message = response.body()?.message ?: "Unknown message"
+                        _signUpResult.value = message
+                    }
+                    response.code() == 400 -> {
+                        // Handle 400 Bad Request
+                        _signUpResult.value = "User already exists or invalid request"
+                    }
+                    else -> {
+                        // Handle other error cases
+                        _signUpResult.value = "Sign up failed"
+                    }
                 }
             }
 

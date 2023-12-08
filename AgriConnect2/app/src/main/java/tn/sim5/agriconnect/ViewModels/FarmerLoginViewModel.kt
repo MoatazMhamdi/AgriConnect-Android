@@ -18,6 +18,8 @@ class FarmerLoginViewModel: ViewModel() {
     private lateinit var context: Context
     private val sessionManager: SessionManager by lazy { SessionManager(context) }
     private val _loginResult = MutableLiveData<String>()
+    private val _userExistsResult = MutableLiveData<Boolean>()
+    val userExistsResult: LiveData<Boolean> get() = _userExistsResult
     val loginResult: LiveData<String> get() = _loginResult
     private val _jwtToken = MutableLiveData<String>()
     val jwtToken: LiveData<String> get() = _jwtToken
