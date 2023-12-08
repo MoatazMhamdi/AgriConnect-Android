@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import tn.sim5.agriconnect.ViewModels.FarmerLoginViewModel
@@ -53,7 +54,7 @@ class Profile : AppCompatActivity() {
             if (!sessionManager.isAuthenticated()) {
                 // Session cleared successfully, display a message or log a statement
                 println("Session cleared successfully")
-
+                Toast.makeText(this, "User Logged Out Succefuly", Toast.LENGTH_SHORT).show()
                 // Redirect to the login page
                 startActivity(Intent(this, login::class.java))
                 finish() // Close the current activity to prevent going back to the profile screen using the back button

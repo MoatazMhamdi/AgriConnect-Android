@@ -24,7 +24,10 @@ class SignUp : AppCompatActivity() {
         Log.d("SignUpActivity", "Button Clicked")
 
         viewModel = ViewModelProvider(this).get(FarmerSignUpViewModel::class.java)
+         binding.btnReturn.setOnClickListener {
+             startActivity(Intent(this, login::class.java))
 
+            }
         binding.btnSignUp.setOnClickListener {
             validateAndSignUp()
 

@@ -36,7 +36,7 @@
         android:fontFamily="@font/montserrat_extrabold"
         android:text="Reset Password"
         android:textColor="#385A64"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

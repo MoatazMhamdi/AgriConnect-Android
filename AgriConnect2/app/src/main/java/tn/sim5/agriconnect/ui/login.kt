@@ -42,13 +42,13 @@ class login : AppCompatActivity() {
         if (numTel.isNotEmpty() && password.isNotEmpty()) {
             viewModel.loginFarmer(numTel, password)
 
-           // startActivity(Intent(this, Profile::class.java))
+            startActivity(Intent(this, Profile::class.java))
             viewModel.loginResult.observe(this) { result ->
                 if (result == "Success") {
                     startActivity(Intent(this, Profile::class.java))
                 } else {
                     // Show a Toast message based on the result
-                    Toast.makeText(this, "Verify your Phone Number OR Password", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
                 }
             }
 

@@ -20,7 +20,10 @@ class ForgetPassword : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityForgetPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.btnReturn.setOnClickListener {
+            startActivity(Intent(this@ForgetPassword, login::class.java))
 
+        }
         binding.btnfrgtpss.setOnClickListener {
             val numTel = binding.tiPhone.text.toString()
 
