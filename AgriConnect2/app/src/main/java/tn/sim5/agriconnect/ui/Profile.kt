@@ -42,6 +42,9 @@ class Profile : AppCompatActivity() {
         binding.btnEditProfile.setOnClickListener {
             startActivity(Intent(this, EditProfile::class.java))
         }
+        binding.btnremoveaccount.setOnClickListener {
+            startActivity(Intent(this, DeleteUser::class.java))
+        }
 
         binding.btnLogout.setOnClickListener {
             // Clear session on logout

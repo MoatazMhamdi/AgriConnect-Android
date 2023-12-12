@@ -3,9 +3,14 @@ package tn.sim5.agriconnect.ViewModels
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.DELETE
 import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
+import tn.sim5.agriconnect.models.DeleteUserRequest
+import tn.sim5.agriconnect.models.DeleteUserResponse
 import tn.sim5.agriconnect.models.EditProfileRequest
 import tn.sim5.agriconnect.models.EditProfileResponse
 import tn.sim5.agriconnect.models.FarmerSignUpRequest
@@ -32,4 +37,7 @@ interface ApiService {
     suspend fun verifyOtp(@Body request: VerifyOtpRequest): Response<OtpResponsee>
     @POST("users/resetPassword")
     suspend fun resetPassword(@Body request: ResetPasswordRequest): Response<ResetPasswordResponse>
+    @DELETE("users/{numTel}")
+    suspend fun deleteUserByNumTel(@Path("numTel") numTel: String): Response<DeleteUserResponse>
+
 }

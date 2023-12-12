@@ -8,7 +8,7 @@ import tn.sim5.agriconnect.ViewModels.ApiService
 
 object RetrofitImp {
    // private const val BASE_URL = "http://10.0.2.2:9090/"
-    private const val BASE_URL = "http://192.168.1.169:9090/"
+    private const val BASE_URL = "http://192.168.1.14:9090/"
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
@@ -25,6 +25,9 @@ object RetrofitImp {
             .addInterceptor(interceptor)
             .build()
     }
+
+
+
 
     val apiService: ApiService by lazy {
         retrofit.create(ApiService::class.java)

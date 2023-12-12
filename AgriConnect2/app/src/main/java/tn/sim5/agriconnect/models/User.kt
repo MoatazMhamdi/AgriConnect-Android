@@ -53,4 +53,9 @@ data class ResetPasswordRequest(val numTel: String, val newPassword: String)
 data class ResetPasswordResponse(
     val message: String
 )
-
+data class DeleteUserResponse(
+    val message: String,
+)
+data class DeleteUserRequest(
+    val numTel: String
+)
