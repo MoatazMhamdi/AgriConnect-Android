@@ -1,44 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/textViewDateMaintenance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:text="Date de maintenance"
+        android:textSize="24sp"
+        android:textColor="@android:color/black" />
 
+    <TextView
+        android:id="@+id/textViewTypeMaintenance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDateMaintenance"
+        android:layout_marginTop="8dp"
+        android:text="Type de maintenance"
+        android:textSize="20sp"
+        android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/textViewDateMaintenance"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Date de maintenance" />
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewTypeMaintenance"
+        android:layout_marginTop="8dp"
+        android:text="Description"
+        android:textSize="20sp"
+        android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/textViewTypeMaintenance"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Type de maintenance" />
+    <!-- Champ pour Coût_Maintenance -->
+    <TextView
+        android:id="@+id/textViewCoutMaintenance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewDescription"
+        android:layout_marginTop="8dp"
+        android:text="Coût de maintenance"
+        android:textSize="20sp"
+        android:textColor="@android:color/black" />
 
-        <TextView
-            android:id="@+id/textViewDescription"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Description" />
+    <TextView
+        android:id="@+id/textViewTotalMaintenance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewCoutMaintenance"
+        android:layout_marginTop="8dp"
+        android:text="Total de Maintenance"
+        android:textSize="20sp"
+        android:textColor="@android:color/black" />
 
-        <!-- Champ pour Coût_Maintenance -->
-        <TextView
-            android:id="@+id/textViewCoutMaintenance"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:text="Coût de maintenance" />
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@id/textViewTotalMaintenance"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/darker_gray" />
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/lineChart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"/>
-
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

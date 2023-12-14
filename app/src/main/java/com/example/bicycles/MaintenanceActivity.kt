@@ -34,6 +34,8 @@ class MaintenanceActivity : AppCompatActivity() {
     private lateinit var textViewTypeMaintenance: TextView
     private lateinit var textViewDescription: TextView
     private lateinit var textViewCoutMaintenance: TextView
+    private lateinit var textviewTotalMaintenance: TextView
+    private var totalMaintenanceCount: Int = 0
     private lateinit var equipmentId: String
 
 
@@ -53,6 +55,8 @@ class MaintenanceActivity : AppCompatActivity() {
         textViewTypeMaintenance = findViewById(R.id.textViewTypeMaintenance)
         textViewDescription = findViewById(R.id.textViewDescription)
         textViewCoutMaintenance = findViewById(R.id.textViewCoutMaintenance)
+        textviewTotalMaintenance = findViewById(R.id.textViewTotalMaintenance)
+
 
         val lineChart = findViewById<LineChart>(R.id.lineChart)
 
@@ -108,6 +112,8 @@ class MaintenanceActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
                         response.body()?.let { maintenanceList ->
                             if (maintenanceList.isNotEmpty()) {
+                                totalMaintenanceCount = maintenanceList.size
+                                textviewTotalMaintenance.text = "Total de maintenances : $totalMaintenanceCount"
                                 // Prenez la dernière maintenance de la liste
                                 val lastMaintenance = maintenanceList.last()
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "319553183758",
+    "project_id": "agriconnect-dc2fc",
+    "storage_bucket": "agriconnect-dc2fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319553183758:android:10fb19615591b318a35c5f",
+        "android_client_info": {
+          "package_name": "com.example.bicycles"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjgDQxsuxbmi9uYPSoMtU5gjLe9B9ex6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

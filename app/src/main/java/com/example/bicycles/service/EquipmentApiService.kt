@@ -41,6 +41,26 @@ interface EquipmentApiService {
         @Part("userId") userId: RequestBody,
         @Part image: MultipartBody.Part
     ): Call<Equipment>
+    @Multipart
+    @PUT("equipments/sansImage/{id}")
+    fun updateEquipmentWithOutImage(
+        @Path("id") equipmentId: String,
+        @Part("name") name: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("categorie") categorie: RequestBody,
+        @Part("etat") etat: RequestBody,
+        @Part("userId") userId: RequestBody
+    ): Call<Equipment>
+    @Multipart
+    @PUT("equipments/sansImage/{id}")
+    fun updateEquipmentSansImage(
+        @Path("id") equipmentId: String,
+        @Part("name") name: RequestBody,
+        @Part("description") description: RequestBody,
+        @Part("categorie") categorie: RequestBody,
+        @Part("etat") etat: RequestBody,
+        @Part("userId") userId: RequestBody
+    ): Call<Equipment>
 
 
     @DELETE("equipments/{id}")

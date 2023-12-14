@@ -64,8 +64,8 @@ class EquipmentAdapter(var equipmentList: ArrayList<Equipment>, private val cont
             txt_description.text = e.description
 
             val imageUrl = "http://10.0.2.2:9090/" + e.image
-            Picasso.with(context).load(imageUrl).into(img)
-            val staticUser = User(id = "655f76d027ec50c1a8f8cebc", role = "farmer")
+            Picasso.get().load(imageUrl).into(img)
+            val staticUser = User(id = "65606386256063a7781f6eda", role = "farmer")
             itemView.setOnClickListener {
                 Log.d("EquipmentAdapter", "Élément sélectionné: ID = ${e._id}")
                 val intent = Intent(context, EquipmentDetailActivity::class.java)

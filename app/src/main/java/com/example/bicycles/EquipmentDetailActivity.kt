@@ -164,8 +164,6 @@ class EquipmentDetailActivity : AppCompatActivity() {
         val categorie = textInputEditTextCategorie.text.toString()
         val etat = textInputEditTextEtat.text.toString()
 
-
-
         if (name.isEmpty() || description.isEmpty() || categorie.isEmpty() || etat.isEmpty()) {
             Log.e("UpdateEquipment", "Incomplete or missing data. Aborting equipment update.")
             return
@@ -174,15 +172,9 @@ class EquipmentDetailActivity : AppCompatActivity() {
         // ID of the equipment to be updated
         val equipmentId = equipmentId
 
-        val updatedEquipment = Equipment(
-            _id = equipmentId,
-            name = name,
-            description = description,
-            categorie = categorie,
-            etat = etat,
-            userId = userId,
-            image = null // Initialize image as null, it will be updated if selectedImageUri is not null
-        )
+        // Initialize image as null
+        var imageRequestBody: RequestBody? = null
+        var newImagePart: MultipartBody.Part? = null
 
         // Check if a new image is selected
         if (selectedImageUri != null) {
@@ -190,35 +182,77 @@ class EquipmentDetailActivity : AppCompatActivity() {
             val newImageFile = File(RealPathUtil.getRealPath(this, selectedImageUri!!)!!)
 
             // Create MultipartBody.Part for the new image
-            val newImagePart = MultipartBody.Part.createFormData("image", newImageFile.name, RequestBody.create(MediaType.parse("image/*"), newImageFile))
-            val userIdRequestBody = RequestBody.create(MediaType.parse("text/plain"), userId)
-            val nameRequestBody = RequestBody.create(MediaType.parse("text/plain"), name)
-            val descriptionRequestBody = RequestBody.create(MediaType.parse("text/plain"), description)
-            val categorieRequestBody = RequestBody.create(MediaType.parse("text/plain"), categorie)
-            val etatRequestBody = RequestBody.create(MediaType.parse("text/plain"), etat)
-            Log.d("UpdateEquipment", "UserID: $userId, Name: $name, Description: $description, Categorie: $categorie, Etat: $etat, Image: $newImageFile")
+            imageRequestBody = RequestBody.create(MediaType.parse("image/*"), newImageFile)
+            newImagePart = MultipartBody.Part.createFormData("image", newImageFile.name, imageRequestBody)
+        }
 
-            // Use Retrofit to make the network request with the new image
-            RetrofitInstance.api.updateEquipmentWithImage(equipmentId, nameRequestBody, descriptionRequestBody, categorieRequestBody, etatRequestBody, userIdRequestBody, newImagePart)
-                .enqueue(object : Callback<Equipment> {
-                    override fun onResponse(call: Call<Equipment>, response: Response<Equipment>) {
-                        if (response.isSuccessful) {
-                            val updatedEquipment = response.body()
-                            navigateToList()
-                            Log.d("UpdateEquipment", "Equipment updated successfully.")
-                        } else {
-                            Log.e("UpdateEquipment", "Failed to update equipment. Server response: ${response.message()}")
-                            // Additional logging or error handling if needed
-                        }
-                    }
+        val userIdRequestBody = RequestBody.create(MediaType.parse("text/plain"), userId)
+        val nameRequestBody = RequestBody.create(MediaType.parse("text/plain"), name)
+        val descriptionRequestBody = RequestBody.create(MediaType.parse("text/plain"), description)
+        val categorieRequestBody = RequestBody.create(MediaType.parse("text/plain"), categorie)
+        val etatRequestBody = RequestBody.create(MediaType.parse("text/plain"), etat)
+        Log.d("UpdateEquipment", "UserID: $userId, Name: $name, Description: $description, Categorie: $categorie, Etat: $etat")
 
-                    override fun onFailure(call: Call<Equipment>, t: Throwable) {
-                        Log.e("UpdateEquipment", "API call failed. Error: ${t.message}")
+        // Use Retrofit to make the network request
+        if (newImagePart != null) {
+            // Update with image
+            RetrofitInstance.api.updateEquipmentWithImage(
+                equipmentId,
+                nameRequestBody,
+                descriptionRequestBody,
+                categorieRequestBody,
+                etatRequestBody,
+                userIdRequestBody,
+                newImagePart
+            ).enqueue(object : Callback<Equipment> {
+                override fun onResponse(call: Call<Equipment>, response: Response<Equipment>) {
+                    if (response.isSuccessful) {
+                        val updatedEquipment = response.body()
+                        navigateToList()
+                        Log.d("UpdateEquipment", "Equipment updated successfully.")
+                    } else {
+                        Log.e("UpdateEquipment", "Failed to update equipment. Server response: ${response.message()}")
                         // Additional logging or error handling if needed
                     }
-                })
+                }
+
+                override fun onFailure(call: Call<Equipment>, t: Throwable) {
+                    Log.e("UpdateEquipment", "API call failed. Error: ${t.message}")
+                    // Additional logging or error handling if needed
+                }
+            })
+        } else {
+            // Update without image
+            Log.d("UpdateEquipment", "Updating without image - UserID: $userId, Name: $name, Description: $description, Categorie: $categorie, Etat: $etat")
+
+            RetrofitInstance.api.updateEquipmentWithOutImage(
+                equipmentId,
+                nameRequestBody,
+                descriptionRequestBody,
+                categorieRequestBody,
+                etatRequestBody,
+                userIdRequestBody
+            ).enqueue(object : Callback<Equipment> {
+                override fun onResponse(call: Call<Equipment>, response: Response<Equipment>) {
+                    if (response.isSuccessful) {
+                        val updatedEquipment = response.body()
+                        navigateToList()
+                        Log.d("UpdateEquipment", "Equipment updated successfully.")
+                    } else {
+                        Log.e("UpdateEquipment", "Failed to update equipment. Server response: ${response.message()}")
+                        // Additional logging or error handling if needed
+                    }
+                }
+
+                override fun onFailure(call: Call<Equipment>, t: Throwable) {
+                    Log.e("UpdateEquipment", "API call failed. Error: ${t.message}")
+                    // Additional logging or error handling if needed
+                }
+            })
         }
+
     }
+
 
 
 
@@ -304,7 +338,7 @@ class EquipmentDetailActivity : AppCompatActivity() {
                         textInputEditTextEtat.setText(equipment.etat)
 
                         val imageUrl = "http://10.0.2.2:9090/" + equipment.image // URL de l'image
-                        Picasso.with(this@EquipmentDetailActivity).load(imageUrl).into(imageViewEquipmentDetail)
+                        Picasso.get().load(imageUrl).into(imageViewEquipmentDetail)
 
                         Log.d("EquipmentDetail", "Équipement reçu: $equipment")
                     } ?: Log.d("EquipmentDetail", "La réponse est réussie, mais le corps est null")
