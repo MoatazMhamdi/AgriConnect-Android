@@ -75,5 +75,9 @@ class ProfileC : AppCompatActivity() {
                 println("Error clearing session")
             }
         }
+        val numTel = intent.getStringExtra("USER_NUM_TEL")
+        if (numTel != null) {
+            binding.txtFullName.text = numTel
+        }
     }
 }

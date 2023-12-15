@@ -51,8 +51,10 @@ class loginClient : AppCompatActivity() {
                         Toast.makeText(this, "Phone number or Password are incorrect!", Toast.LENGTH_SHORT).show()
                     }
                     else -> {
-                        Toast.makeText(this, "Logged In", Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this, ProfileC::class.java))
+                        Toast.makeText(this, "Client Logged In", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, Profile::class.java)
+                        intent.putExtra("USER_NUM_TEL", numTel)
+                        startActivity(intent)
                     }
                 }
             }
