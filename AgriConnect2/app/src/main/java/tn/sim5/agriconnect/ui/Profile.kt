@@ -27,14 +27,14 @@ class Profile : AppCompatActivity() {
         sessionManager = SessionManager(this)
         viewModel = ViewModelProvider(this).get(FarmerLoginViewModel::class.java)
         //observe name, email
-        // Retrieve user information from Intent extras
+/*        // Retrieve user information from Intent extras
         viewModel.userFullName.observe(this, Observer { fullName ->
             binding.txtFullName.text = fullName
         })
 
         viewModel.userEmail.observe(this, Observer { email ->
             binding.txtEmail.text = email
-        })
+        })*/
         // Check if the user is authenticated
         println("Is authenticated when checking: ${sessionManager.isAuthenticated()}")
 
@@ -73,6 +73,10 @@ class Profile : AppCompatActivity() {
                 // Session not cleared, display an error message or log an error statement
                 println("Error clearing session")
             }
+        }
+        val numTel = intent.getStringExtra("USER_NUM_TEL")
+        if (numTel != null) {
+            binding.txtFullName.text = numTel
         }
     }
 }

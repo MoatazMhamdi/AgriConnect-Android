@@ -42,31 +42,37 @@ class login : AppCompatActivity() {
         if (numTel.isNotEmpty() && password.isNotEmpty()) {
             viewModel.loginFarmer(numTel, password)
 
-            startActivity(Intent(this, Profile::class.java))
+         //   startActivity(Intent(this, Profile::class.java))
             viewModel.loginResult.observe(this) { result ->
-                if (result == "Success") {
-                    startActivity(Intent(this, Profile::class.java))
-                } else {
-                    // Show a Toast message based on the result
-                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+                when (result) {
+                    "Login failed" -> {
+                        Toast.makeText(this, "Phone number or Password are incorrect!", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        Toast.makeText(this, "Logged In", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, Profile::class.java)
+                        intent.putExtra("USER_NUM_TEL", numTel)
+                        startActivity(intent)
+                    }
                 }
             }
-            viewModel.loginResult.observe(this) { result ->
-                if (result == "Success") {
-                    // User logged in successfully, get user information and pass it to the profile activity
-                    val userFullName = viewModel.getUserFullName()
-                    val userEmail = viewModel.getUserEmail()
 
-                    // Pass user information to the profile activity
-                    val intent = Intent(this, Profile::class.java)
-                    intent.putExtra("USER_FULL_NAME", userFullName)
-                    intent.putExtra("USER_EMAIL", userEmail)
-                    startActivity(intent)
-                } else {
-                    // Show a Toast message based on the result
-                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
-                }
-            }
+            /*  viewModel.loginResult.observe(this) { result ->
+                  if (result == "Success") {
+                      // User logged in successfully, get user information and pass it to the profile activity
+                      val userFullName = viewModel.getUserFullName()
+                      val userEmail = viewModel.getUserEmail()
+
+                      // Pass user information to the profile activity
+                      val intent = Intent(this, Profile::class.java)
+                      intent.putExtra("USER_FULL_NAME", userFullName)
+                      intent.putExtra("USER_EMAIL", userEmail)
+                      startActivity(intent)
+                  } else {
+                      // Show a Toast message based on the result
+                      Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+                  }
+              }*/
 
 
         } else {

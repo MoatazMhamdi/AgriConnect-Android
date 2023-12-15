@@ -44,16 +44,19 @@ class loginClient : AppCompatActivity() {
         if (numTel.isNotEmpty() && password.isNotEmpty()) {
             viewModel.loginFarmer(numTel, password)
 
-            startActivity(Intent(this, ProfileC::class.java))
+      //      startActivity(Intent(this, ProfileC::class.java))
             viewModel.loginResult.observe(this) { result ->
-                if (result == "Success") {
-                    startActivity(Intent(this, ProfileC::class.java))
-                } else {
-                    // Show a Toast message based on the result
-                    Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
+                when (result) {
+                    "Login failed" -> {
+                        Toast.makeText(this, "Phone number or Password are incorrect!", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        Toast.makeText(this, "Logged In", Toast.LENGTH_SHORT).show()
+                        startActivity(Intent(this, ProfileC::class.java))
+                    }
                 }
             }
-            viewModel.loginResult.observe(this) { result ->
+        /*    viewModel.loginResult.observe(this) { result ->
                 if (result == "Success") {
                     // User logged in successfully, get user information and pass it to the profile activity
                     val userFullName = viewModel.getUserFullName()
@@ -69,7 +72,7 @@ class loginClient : AppCompatActivity() {
                     Toast.makeText(this, result, Toast.LENGTH_SHORT).show()
                 }
             }
-
+*/
 
         } else {
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
