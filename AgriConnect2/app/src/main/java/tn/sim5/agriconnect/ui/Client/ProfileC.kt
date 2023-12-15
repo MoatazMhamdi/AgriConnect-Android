@@ -9,18 +9,19 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import tn.sim5.agriconnect.ViewModels.FarmerLoginViewModel
 import tn.sim5.agriconnect.databinding.ActivityProfileBinding
+import tn.sim5.agriconnect.databinding.ActivityProfileCBinding
 import tn.sim5.agriconnect.models.LoginResponse
 import tn.sim5.agriconnect.ui.login
 import tn.sim5.agriconnect.utils.SessionManager
 
-class Profile : AppCompatActivity() {
-    private lateinit var binding: ActivityProfileBinding
+class ProfileC : AppCompatActivity() {
+    private lateinit var binding: ActivityProfileCBinding
     private lateinit var sessionManager: SessionManager
     private lateinit var viewModel: FarmerLoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityProfileBinding.inflate(layoutInflater)
+        binding = ActivityProfileCBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Initialize SessionManager

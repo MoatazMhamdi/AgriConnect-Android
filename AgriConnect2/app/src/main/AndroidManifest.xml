@@ -18,6 +18,30 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.DeleteClient"
+            android:exported="false" />
+        <activity
+            android:name=".ui.EditC"
+            android:exported="false" />
+        <activity
+            android:name=".ui.ProfileC"
+            android:exported="false" />
+        <activity
+            android:name=".ui.resetPasswordC"
+            android:exported="false" />
+        <activity
+            android:name=".ui.otpC"
+            android:exported="false" />
+        <activity
+            android:name=".ui.forgetPasswordC"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Register_client"
+            android:exported="false" />
+        <activity
+            android:name=".ui.loginClient"
+            android:exported="false" />
+        <activity
             android:name=".ui.DeleteUser"
             android:exported="false" />
         <activity

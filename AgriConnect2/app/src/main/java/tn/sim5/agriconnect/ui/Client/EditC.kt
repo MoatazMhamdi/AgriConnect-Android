@@ -6,18 +6,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import tn.sim5.agriconnect.ViewModels.ProfileViewModel
+import tn.sim5.agriconnect.databinding.ActivityEditCBinding
 import tn.sim5.agriconnect.databinding.ActivityEditProfileBinding
+import tn.sim5.agriconnect.databinding.ActivityProfileCBinding
 import tn.sim5.agriconnect.models.EditProfileResponse
 import tn.sim5.agriconnect.utils.SessionManager
 
-class EditProfile : AppCompatActivity() {
-    private lateinit var binding: ActivityEditProfileBinding
+class EditC : AppCompatActivity() {
+    private lateinit var binding: ActivityEditCBinding
     private lateinit var viewModel: ProfileViewModel
     private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        binding = ActivityEditCBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         // Initialize ViewModel
@@ -34,7 +36,7 @@ class EditProfile : AppCompatActivity() {
 
         // Handle button click to return to Profile activity
         binding.btnReturn.setOnClickListener {
-            startActivity(Intent(this, Profile::class.java))
+            startActivity(Intent(this, ProfileC::class.java))
         }
         if (token != null && userId != null) {
             // Handle button click to edit profile

@@ -24,9 +24,11 @@ class FarmerLoginViewModel: ViewModel() {
     private val _jwtToken = MutableLiveData<String>()
     val jwtToken: LiveData<String> get() = _jwtToken
     private val apiService = RetrofitImp.apiService
-
-
-
+// observe live data name, email
+    private val _userFullName = MutableLiveData<String>()
+    private val _userEmail = MutableLiveData<String>()
+    val userFullName: LiveData<String> get() = _userFullName
+    val userEmail: LiveData<String> get() = _userEmail
     fun init(context: Context) {
         this.context = context
     }
@@ -41,6 +43,8 @@ class FarmerLoginViewModel: ViewModel() {
                     if (loginResponse != null) {
                         val message = loginResponse.message ?: "Unknown message"
                         _loginResult.value = message
+                        _userFullName.value = loginResponse.name
+                        _userEmail.value = loginResponse.email
 
                         // Handle JWT token
                         val jwtToken = loginResponse.token
@@ -94,5 +98,16 @@ class FarmerLoginViewModel: ViewModel() {
         val editor = sharedPreferences.edit()
         editor.remove("JWT")
         editor.apply()
+    }
+    fun setUserDetails(name: String, email: String) {
+        _userFullName.value = name
+        _userEmail.value = email
+    }
+    fun getUserFullName(): String? {
+        return userFullName.value
+    }
+
+    fun getUserEmail(): String? {
+        return userEmail.value
     }
 }

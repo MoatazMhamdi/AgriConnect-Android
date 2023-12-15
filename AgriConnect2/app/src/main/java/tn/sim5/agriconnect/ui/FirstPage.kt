@@ -7,6 +7,7 @@ import android.util.Log
 import tn.sim5.agriconnect.R
 import tn.sim5.agriconnect.databinding.ActivityFirstPageBinding
 import tn.sim5.agriconnect.databinding.ActivityLoginBinding
+import tn.sim5.agriconnect.ui.loginClient
 
 class FirstPage : AppCompatActivity() {
     private lateinit var binding: ActivityFirstPageBinding
@@ -19,5 +20,9 @@ class FirstPage : AppCompatActivity() {
         binding.btnFarmer.setOnClickListener {
             startActivity(Intent(this, login::class.java))
 
-        }    }
+        }
+        binding.btnClient.setOnClickListener {
+            startActivity(Intent(this, loginClient::class.java))
+
+        } }
 }

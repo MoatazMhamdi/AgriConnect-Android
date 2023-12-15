@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bggg"
     android:id="@+id/context_view"
-    tools:context=".ui.Client.ProfileC">
+    tools:context=".ui.ProfileC">
 
     <ImageView
         android:id="@+id/profilePic"

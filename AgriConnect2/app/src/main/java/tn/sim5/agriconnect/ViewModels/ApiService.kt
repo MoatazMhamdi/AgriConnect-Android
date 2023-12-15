@@ -1,5 +1,6 @@
 package tn.sim5.agriconnect.ViewModels
 
+import ClientSignUp
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Body
@@ -9,6 +10,8 @@ import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
+import tn.sim5.agriconnect.models.ClientSignUpRequest
+import tn.sim5.agriconnect.models.ClientSignUpResponse
 import tn.sim5.agriconnect.models.DeleteUserRequest
 import tn.sim5.agriconnect.models.DeleteUserResponse
 import tn.sim5.agriconnect.models.EditProfileRequest
@@ -27,6 +30,8 @@ import tn.sim5.agriconnect.models.VerifyOtpRequest
 interface ApiService {
     @POST("users/FarmerSignup") // Replace with your actual API endpoint
     fun signUpFarmer(@Body request: FarmerSignUpRequest): Call<FarmerSignUpResponse>
+    @POST("users/ClientSignup") // Replace with your actual API endpoint
+    fun signUpClient(@Body request: ClientSignUpRequest): Call<ClientSignUpResponse>
     @POST("users/login")
     fun loginUser(@Body request: LoginRequest): Call<LoginResponse>
     @PATCH("users/editProfile")
