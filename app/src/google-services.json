@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "144557950821",
+    "project_id": "qdvf-52a88",
+    "storage_bucket": "qdvf-52a88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144557950821:android:fbef2aed3273982a4ac38c",
+        "android_client_info": {
+          "package_name": "com.example.bicycles"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhsza90aC-Xn52ovAI6BAbPMlY-q7ipEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

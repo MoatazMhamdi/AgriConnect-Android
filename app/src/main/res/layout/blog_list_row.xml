@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <!-- ... Votre AppBarLayout et NestedScrollView ... -->
+
+    <RelativeLayout
+        android:id="@+id/mainContentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Titre -->
+        <TextView
+            android:id="@+id/textViewTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Titre de la publication"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <!-- Image -->
+        <ImageView
+            android:id="@+id/imageViewPublished"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_below="@id/textViewTitle"
+            android:layout_marginTop="16dp"
+            android:scaleType="centerCrop"
+            />
+
+        <!-- Lieu -->
+        <TextView
+            android:id="@+id/textViewLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageViewPublished"
+            android:layout_marginTop="16dp"
+            android:text="Lieu de la publication"
+            android:textSize="16sp" />
+
+        <!-- Date -->
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewLocation"
+            android:layout_marginTop="8dp"
+            android:text="Date de publication"
+            android:textSize="14sp" />
+
+        <!-- Prix -->
+        <TextView
+            android:id="@+id/textViewPrix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewDate"
+            android:layout_marginTop="8dp"
+            android:text="Prix"
+            android:textSize="14sp" />
+
+        <!-- Description -->
+        <TextView
+            android:id="@+id/textViewImageDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewPrix"
+            android:layout_marginTop="16dp"
+            android:text="Description de l'image"
+            android:textSize="16sp" />
+        <!-- Boutons -->
+        <LinearLayout
+            android:id="@+id/buttonsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recyclerViewBlogs"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bouton 1" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bouton 2" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bouton 3" />
+        </LinearLayout>
+
+        <!-- RecyclerView for Blogs -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewBlogs"
+            android:layout_width="385dp"
+            android:layout_height="584dp"
+            android:layout_below="@id/textViewImageDescription"
+            android:layout_marginTop="-374dp" />
+
+
+    </RelativeLayout>
+
+    <!-- Floating Action Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:backgroundTint="?attr/colorAccent"
+        android:src="@android:drawable/ic_input_add"
+        android:contentDescription="Add a new blog post"
+    android:layout_alignParentRight="true" />
+
+</RelativeLayout>
