@@ -14,7 +14,8 @@ import { PrismaService } from "../../prisma/prisma.service";
 import {
   Prisma,
   Order, // @ts-ignore
-  Customer,
+  Customer, // @ts-ignore
+  Product,
 } from "@prisma/client";
 
 export class OrderServiceBase {
@@ -58,5 +59,13 @@ export class OrderServiceBase {
         where: { id: parentId },
       })
       .customer();
+  }
+
+  async getProduct(parentId: string): Promise<Product | null> {
+    return this.prisma.order
+      .findUnique({
+        where: { id: parentId },
+      })
+      .product();
   }
 }

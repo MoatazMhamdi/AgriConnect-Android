@@ -22,6 +22,9 @@ import { Address } from "./Address";
 import { AddressFindManyArgs } from "./AddressFindManyArgs";
 import { AddressWhereUniqueInput } from "./AddressWhereUniqueInput";
 import { AddressUpdateInput } from "./AddressUpdateInput";
+import { CustomerFindManyArgs } from "../../customer/base/CustomerFindManyArgs";
+import { Customer } from "../../customer/base/Customer";
+import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 
 export class AddressControllerBase {
   constructor(protected readonly service: AddressService) {}
@@ -152,5 +155,89 @@ export class AddressControllerBase {
       }
       throw error;
     }
+  }
+
+  @common.Get("/:id/customers")
+  @ApiNestedQuery(CustomerFindManyArgs)
+  async findCustomers(
+    @common.Req() request: Request,
+    @common.Param() params: AddressWhereUniqueInput
+  ): Promise<Customer[]> {
+    const query = plainToClass(CustomerFindManyArgs, request.query);
+    const results = await this.service.findCustomers(params.id, {
+      ...query,
+      select: {
+        address: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        email: true,
+        firstName: true,
+        id: true,
+        lastName: true,
+        phone: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @common.Post("/:id/customers")
+  async connectCustomers(
+    @common.Param() params: AddressWhereUniqueInput,
+    @common.Body() body: CustomerWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      customers: {
+        connect: body,
+      },
+    };
+    await this.service.updateAddress({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Patch("/:id/customers")
+  async updateCustomers(
+    @common.Param() params: AddressWhereUniqueInput,
+    @common.Body() body: CustomerWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      customers: {
+        set: body,
+      },
+    };
+    await this.service.updateAddress({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.Delete("/:id/customers")
+  async disconnectCustomers(
+    @common.Param() params: AddressWhereUniqueInput,
+    @common.Body() body: CustomerWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      customers: {
+        disconnect: body,
+      },
+    };
+    await this.service.updateAddress({
+      where: params,
+      data,
+      select: { id: true },
+    });
   }
 }

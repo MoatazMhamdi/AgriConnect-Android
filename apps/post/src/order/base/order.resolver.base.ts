@@ -21,6 +21,7 @@ import { CreateOrderArgs } from "./CreateOrderArgs";
 import { UpdateOrderArgs } from "./UpdateOrderArgs";
 import { DeleteOrderArgs } from "./DeleteOrderArgs";
 import { Customer } from "../../customer/base/Customer";
+import { Product } from "../../product/base/Product";
 import { OrderService } from "../order.service";
 @graphql.Resolver(() => Order)
 export class OrderResolverBase {
@@ -63,6 +64,12 @@ export class OrderResolverBase {
               connect: args.data.customer,
             }
           : undefined,
+
+        product: args.data.product
+          ? {
+              connect: args.data.product,
+            }
+          : undefined,
       },
     });
   }
@@ -80,6 +87,12 @@ export class OrderResolverBase {
           customer: args.data.customer
             ? {
                 connect: args.data.customer,
+              }
+            : undefined,
+
+          product: args.data.product
+            ? {
+                connect: args.data.product,
               }
             : undefined,
         },
@@ -116,6 +129,19 @@ export class OrderResolverBase {
   })
   async getCustomer(@graphql.Parent() parent: Order): Promise<Customer | null> {
     const result = await this.service.getCustomer(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @graphql.ResolveField(() => Product, {
+    nullable: true,
+    name: "product",
+  })
+  async getProduct(@graphql.Parent() parent: Order): Promise<Product | null> {
+    const result = await this.service.getProduct(parent.id);
 
     if (!result) {
       return null;

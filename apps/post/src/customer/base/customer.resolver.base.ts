@@ -22,6 +22,7 @@ import { UpdateCustomerArgs } from "./UpdateCustomerArgs";
 import { DeleteCustomerArgs } from "./DeleteCustomerArgs";
 import { OrderFindManyArgs } from "../../order/base/OrderFindManyArgs";
 import { Order } from "../../order/base/Order";
+import { Address } from "../../address/base/Address";
 import { CustomerService } from "../customer.service";
 @graphql.Resolver(() => Customer)
 export class CustomerResolverBase {
@@ -60,7 +61,15 @@ export class CustomerResolverBase {
   ): Promise<Customer> {
     return await this.service.createCustomer({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        address: args.data.address
+          ? {
+              connect: args.data.address,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -71,7 +80,15 @@ export class CustomerResolverBase {
     try {
       return await this.service.updateCustomer({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          address: args.data.address
+            ? {
+                connect: args.data.address,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -111,5 +128,20 @@ export class CustomerResolverBase {
     }
 
     return results;
+  }
+
+  @graphql.ResolveField(() => Address, {
+    nullable: true,
+    name: "address",
+  })
+  async getAddress(
+    @graphql.Parent() parent: Customer
+  ): Promise<Address | null> {
+    const result = await this.service.getAddress(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }
