@@ -11,8 +11,15 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional, IsDate, IsInt } from "class-validator";
+import {
+  IsString,
+  IsOptional,
+  IsDate,
+  ValidateNested,
+  IsInt,
+} from "class-validator";
 import { Type } from "class-transformer";
+import { Customer } from "../../customer/base/Customer";
 
 @ObjectType()
 class Address {
@@ -56,6 +63,15 @@ class Address {
   @Type(() => Date)
   @Field(() => Date)
   createdAt!: Date;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Customer],
+  })
+  @ValidateNested()
+  @Type(() => Customer)
+  @IsOptional()
+  customers?: Array<Customer>;
 
   @ApiProperty({
     required: true,

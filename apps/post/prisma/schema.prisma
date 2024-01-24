@@ -21,6 +21,8 @@ model Order {
 }
 
 model Customer {
+  address   Address? @relation(fields: [addressId], references: [id])
+  addressId String?  @db.ObjectId
   createdAt DateTime @default(now())
   email     String?
   firstName String?
@@ -35,10 +37,11 @@ model Address {
   address_1 String?
   address_2 String?
   city      String?
-  createdAt DateTime @default(now())
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime   @default(now())
+  customers Customer[]
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
   state     String?
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime   @updatedAt
   zip       Int?
 }
 
