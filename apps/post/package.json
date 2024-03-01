@@ -1,5 +1,5 @@
 {
-  "name": "@post-1/server",
+  "name": "@post/server",
   "private": true,
   "scripts": {
     "start": "nest start",
